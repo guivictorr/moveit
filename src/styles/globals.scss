@@ -1,0 +1,15 @@
+@import './variables.scss';
+@import './responsivity.scss';
+@import './reset.scss';
+
+body {
+  background-color: $background;
+  color: $text;
+}
+
+body,
+input,
+textarea,
+button {
+  font: 400 1.6rem 'Inter', sans-serif;
+}
