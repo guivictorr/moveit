@@ -2,6 +2,7 @@ import { createContext, ReactNode, useEffect, useState } from 'react';
 import Cookie from 'js-cookie';
 
 import challenges from '../data/challenges.json';
+import LevelUpModal from '../components/LevelUpModal';
 
 interface IChallengesProvider {
   children: ReactNode;
@@ -42,6 +43,7 @@ export default function ChallengesProvider({
     rest.challengesCompleted ?? 0,
   );
   const [activeChallenge, setActiveChallenge] = useState(null);
+  const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
 
   useEffect(() => {
     Notification.requestPermission();
@@ -55,8 +57,13 @@ export default function ChallengesProvider({
     Cookie.set('challengesCompleted', String(challengesCompleted));
   }, [level, currentExperience, challengesCompleted]);
 
+  function closeLevelUpModal() {
+    setIsLevelUpModalOpen(false);
+  }
+
   function levelUp() {
     setLevel(level + 1);
+    setIsLevelUpModalOpen(true);
   }
 
   function startNewChallenge() {
@@ -112,6 +119,9 @@ export default function ChallengesProvider({
       }}
     >
       {children}
+      {isLevelUpModalOpen && (
+        <LevelUpModal level={level} action={closeLevelUpModal} />
+      )}
     </ChallengesContext.Provider>
   );
 }
