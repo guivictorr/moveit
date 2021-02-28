@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 import styles from '../src/styles/pages/Home.module.scss';
 
 import ExperienceBar from '../src/components/ExperienceBar';
@@ -8,6 +10,9 @@ import Countdown from '../src/components/Countdown';
 export default function Home() {
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Move.it</title>
+      </Head>
       <ExperienceBar />
 
       <section>

@@ -52,7 +52,23 @@
   font-weight: 600;
   transition: background 0.4s ease;
 
-  &:hover {
+  &:not(:disabled):hover {
     background: $blue-dark;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background: $white;
+    color: $text;
+  }
+}
+
+.countdownButtonActive {
+  background: $white;
+  color: $title;
+
+  &:hover {
+    background: $red;
+    color: $white;
   }
 }
