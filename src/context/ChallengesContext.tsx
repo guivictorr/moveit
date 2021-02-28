@@ -15,9 +15,11 @@ interface IChallenge {
 interface IChallengesContext {
   levelUp(): void;
   startNewChallenge(): void;
+  resetChallenge(): void;
   currentExperience: number;
   challengesCompleted: number;
   activeChallenge: IChallenge;
+  experienceToNextLevel: number;
 }
 
 export const ChallengesContext = createContext({} as IChallengesContext);
@@ -27,6 +29,8 @@ export default function ChallengesProvider({ children }: IChallengesProvider) {
   const [currentExperience, setCurrentExperience] = useState(0);
   const [challengesCompleted, setChallengesCompleted] = useState(0);
   const [activeChallenge, setActiveChallenge] = useState(null);
+
+  const experienceToNextLevel = ((level + 1) * 4) ** 2;
 
   function levelUp() {
     setLevel(level + 1);
@@ -38,13 +42,19 @@ export default function ChallengesProvider({ children }: IChallengesProvider) {
     setActiveChallenge(challenge);
   }
 
+  function resetChallenge() {
+    setActiveChallenge(null);
+  }
+
   return (
     <ChallengesContext.Provider
       value={{
         levelUp,
+        startNewChallenge,
+        resetChallenge,
         currentExperience,
         challengesCompleted,
-        startNewChallenge,
+        experienceToNextLevel,
         activeChallenge,
       }}
     >
