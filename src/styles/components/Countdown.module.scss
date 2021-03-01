@@ -67,7 +67,7 @@
   background: $white;
   color: $title;
 
-  &:hover {
+  &:not(:disabled):hover {
     background: $red;
     color: $white;
   }
